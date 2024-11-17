@@ -1,0 +1,14 @@
+<% if(message){ %> <font color="green"> <%= message%></font><% } %> <%
+if(errmessage){ %><font color="red"> <%= errmessage%></font><% } %> <%
+if(user){%>
+<p>
+  <a href="/auth/sign-out">Sign Out</a>
+  <a href="/recipes">Recipes</a>
+  <a href="/ingredients/new">Ingredients</a>
+</p>
+<p></p>
+<h1>Welcome to The Cook Book App. <%= user.username %></h1>
+<% }else{ %>
+<p><a href="/auth/sign-up">Sign Up</a> <a href="/auth/sign-in">Sign In</a></p>
+<h1>Welcome to The Cook Book App Guest</h1>
+<%}%>
