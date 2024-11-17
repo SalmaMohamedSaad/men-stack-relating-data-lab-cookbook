@@ -1,0 +1,33 @@
+<!-- views/listings/show.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= recipe.name %></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+
+    <h1><%= recipe.name %></h1>
+    <p>Instructions: <%= recipe.instructions %> sq ft</p>
+    <h2>Owner</h2>
+    <% if (recipe.owner._id.equals(user._id)) { %>
+    <p>You own this!</p>
+    <% } else { %>
+    <p>You don't own this, <%= recipe.owner.username %> does!</p>
+    <% } %>
+    <h2>Ingredients</h2>
+    <ul>
+      <% ingredients.forEach((ingredient)=>{%>
+      <li><%= ingredient.name%></li>
+
+      <% })%>
+    </ul>
+    <a href="/recipes/<%= recipe._id %>/edit"> Edit This Recipe</a>
+    <form action="/recipes/<%= recipe._id %>?_method=DELETE" method="POST">
+      <button type="submit">Delete this Recipe</button>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit <%= recipe.name %></title>
+  </head>
+  <body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1>Edit a Recipe!</h1>
+
+    <form action="/recipes/<%= recipe._id %>?_method=PUT" method="POST">
+      <label for="name"> Name:</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        value="<%= recipe.name %>"
+      /><br />
+      <label for="instructions">Instructions:</label>
+      <input
+        type="text"
+        name="instructions"
+        id="instructions"
+        value="<%= recipe.instructions %>"
+      /><br />
+
+      <h2>Owner</h2>
+      <% if (recipe.owner._id.equals(user._id)) { %>
+      <p>You own this!</p>
+      <% } else { %>
+      <p>You don't own this, <%= recipe.owner.username %> does!</p>
+      <% } %>
+      <br />
+      <h2>Ingredients</h2>
+      <% ingredients.forEach((ingredient)=>{%>
+      <label for="ingredient"><%= ingredient.name%></label>
+      <input type="checkbox" name="ingredients" value="<%= ingredient._id%>"
+      id="<%= ingredient._id%>" <% if (recipe.ingredients.some(ing =>
+      ing._id.equals(ingredient._id))) { %> checked <% } %> />
+      <br />
+      <% })%>
+      <button type="submit">Save</button>
+    </form>
+  </body>
+</html>

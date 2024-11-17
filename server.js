@@ -17,8 +17,9 @@ mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB ${mongoose.connection.name}`)
 })
 
-app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
 app.use(
